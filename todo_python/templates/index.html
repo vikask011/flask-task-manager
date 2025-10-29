@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My TODO List</title>
+</head>
+<body style="font-family: 'Segoe UI', sans-serif; background: #f0f2f5; margin: 0; padding: 0;">
+    <div style="max-width: 500px; margin: 50px auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+        <h1 style="text-align: center; color: #333;">📝 My TODO List</h1>
+
+        <form action="/add" method="POST" style="display: flex; justify-content: center; margin-bottom: 20px;">
+            <input type="text" name="task" placeholder="Enter a new task..." required
+                style="flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 8px 0 0 8px; outline: none;">
+            <button type="submit"
+                style="padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 0 8px 8px 0; cursor: pointer;">
+                Add
+            </button>
+        </form>
+
+        {% if tasks %}
+        <ul style="list-style: none; padding: 0;">
+            {% for t in tasks %}
+            <li style="display: flex; justify-content: space-between; align-items: center; background: #fafafa; margin-bottom: 10px; padding: 10px 15px; border-radius: 8px; border: 1px solid #e0e0e0;">
+                <span style="color: #333;">{{ t.task }}</span>
+                <div>
+                    <a href="/edit/{{ t.id }}" style="color: #28a745; text-decoration: none; margin-right: 10px;">Edit</a>
+                    <a href="/delete/{{ t.id }}" style="color: #dc3545; text-decoration: none;">Delete</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p style="text-align: center; color: #666;">No tasks yet — add one above 👆</p>
+        {% endif %}
+    </div>
+</body>
+</html>
